@@ -1,53 +1,41 @@
 public class OppgaveO1 {
+    
+    public static double beregneTrinnskatt(double bruttolonn) {
+        
+        double total_skatt = 0.0;
 
-    public static Number[] beregneTrinnskatt(double bruttolonn) {
+        double[] trinn_prosent = {
+            1.7, 4.0, 13.7, 16.7, 17.7
+        };
 
-        int trinn;
-        double prosent;
-        double skatt;
+        int[] trinn_grense_nedre = {
+            217401, 306051, 607151, 942401, 1410751
+        };
+        
+        int[] trinn_grense_ovre  = {
+            306050, 697150, 942400, 1410750 
+        };
 
-        if (bruttolonn >= 217401 && bruttolonn <= 306050) {
-            trinn = 1;
-            prosent = 1.7;
-            skatt = bruttolonn * (prosent/100);
-        } else if (bruttolonn >= 306051 && bruttolonn <= 607150) {
-            trinn = 2;
-            prosent = 4.0;
-            skatt = bruttolonn * (prosent/100);
-        } else if (bruttolonn >= 607151 && bruttolonn <= 942400) {
-            trinn = 3;
-            prosent = 13.7;
-            skatt = bruttolonn * (prosent/100);
-        } else if (bruttolonn >= 942401 && bruttolonn <= 1410750) {
-            trinn = 4;
-            prosent = 16.7;
-            skatt = bruttolonn * (prosent/100);
-        } else if (bruttolonn >= 1410751) {
-            trinn = 5;
-            prosent = 17.7;
-            skatt = bruttolonn * (prosent/100);
-        } else {
-            trinn = 0;
-            skatt = 0;
-            prosent = 0;
+        
+        for (int i = 0; i < 5; i++) {
+            if (bruttolonn >= trinn_grense_nedre[i]) {
+                if (bruttolonn <= trinn_grense_ovre[i]) {
+                    total_skatt = total_skatt + ((trinn_prosent[i]/100) * (bruttolonn - trinn_grense_nedre[i]));
+                } else {
+                    total_skatt = total_skatt + ((trinn_prosent[i]/100) * trinn_grense_ovre[i]);
+                }
+            } else {
+                break;
+            }
         }
-
-        final Number[] trinnskatt = new Number[3];
-
-        skatt = Math.round(skatt);
-
-        trinnskatt[0] = trinn;
-        trinnskatt[1] = skatt;
-        trinnskatt[2] = prosent;
-
-        return trinnskatt;
+        return total_skatt;
     }
 
     public static String trinnSkatt(double bruttolonn) {
-        Number[] beregning = beregneTrinnskatt(bruttolonn);
+        double beregning = beregneTrinnskatt(bruttolonn);
 
-        if (beregning[0].intValue() > 0) {
-            return "=".repeat(15) + "\nDin lønn: " + bruttolonn + "\nTrinn: " +  beregning[0] + "\nProsent: " + beregning[2] + "\nSkatt: " + beregning[1] + "Kr\n" + "=".repeat(15);
+        if (beregning > 0) {
+            return "=".repeat(25) + "\nDin lønn: " + bruttolonn + "\nSkatt: " + beregning + "Kr\n" + "=".repeat(25);
         } else {
             return "Ingen trinnskatt: Lønnen er for lav!";
         }
