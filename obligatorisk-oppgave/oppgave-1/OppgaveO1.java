@@ -1,22 +1,15 @@
+/* Obligatorisk innlevering: Oppgave 1
+ * Av: Bartosz Paszkiewicz */
+
 public class OppgaveO1 {
     
     public static double beregneTrinnskatt(double bruttolonn) {
-        
-        double total_skatt = 0.0;
+    
+        double total_skatt       = 0.0;
+        double[] trinn_prosent   = {1.7, 4.0, 13.7, 16.7, 17.7};
+        int[] trinn_grense_nedre = {217401, 306051, 607151, 942401, 1410751};
+        int[] trinn_grense_ovre  = {306050, 697150, 942400, 1410750, Integer.MAX_VALUE};
 
-        double[] trinn_prosent = {
-            1.7, 4.0, 13.7, 16.7, 17.7
-        };
-
-        int[] trinn_grense_nedre = {
-            217401, 306051, 607151, 942401, 1410751
-        };
-        
-        int[] trinn_grense_ovre  = {
-            306050, 697150, 942400, 1410750 
-        };
-
-        
         for (int i = 0; i < 5; i++) {
             if (bruttolonn >= trinn_grense_nedre[i]) {
                 if (bruttolonn <= trinn_grense_ovre[i]) {
@@ -28,7 +21,7 @@ public class OppgaveO1 {
                 break;
             }
         }
-        return total_skatt;
+        return Math.round(total_skatt);
     }
 
     public static String trinnSkatt(double bruttolonn) {
