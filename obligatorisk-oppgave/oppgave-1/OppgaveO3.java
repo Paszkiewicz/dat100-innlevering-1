@@ -1,3 +1,6 @@
+/* Obligatorisk  Innlevering 1: Oppgave 3
+ * Av: Bartosz Paszkiewicz */
+
 import java.util.Scanner;
 
 public class OppgaveO3 {

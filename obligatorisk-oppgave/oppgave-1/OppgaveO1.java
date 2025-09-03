@@ -1,4 +1,4 @@
-/* Obligatorisk innlevering: Oppgave 1
+/* Obligatorisk  Innlevering 1: Oppgave 1
  * Av: Bartosz Paszkiewicz */
 
 public class OppgaveO1 {
