@@ -15,7 +15,7 @@ public class OppgaveO1 {
                 if (bruttolonn <= trinn_grense_ovre[i]) {
                     total_skatt = total_skatt + ((trinn_prosent[i]/100) * (bruttolonn - trinn_grense_nedre[i]));
                 } else {
-                    total_skatt = total_skatt + ((trinn_prosent[i]/100) * trinn_grense_ovre[i]);
+                    total_skatt = total_skatt + ((trinn_prosent[i]/100) * (trinn_grense_ovre[i]-trinn_grense_nedre[i]));
                 }
             } else {
                 break;
